@@ -1,4 +1,4 @@
-<title>Hôpital de campagne Delta</title>
+<title>Hôpital de campagne</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: poste de commandement. En-tête + onglets, puis quatre vues (tableau de bord, admissions, bloc, dossiers). Couleurs de tri NATO T1-T4 en sémantique. */
