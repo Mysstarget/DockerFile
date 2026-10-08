@@ -1,0 +1,44 @@
+# Démarrage : cp .env.example .env  (renseigner JWT_SECRET et DB_PASSWORD), puis  docker compose up -d --build
+# Première fois :  docker compose exec app node scripts/init-db.js
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-hopital}
+      MYSQL_USER: ${DB_USER:-hopital}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD manquant dans .env}
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      TZ: ${TZ:-Europe/Paris}
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    volumes:
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: 3000
+      TZ: ${TZ:-Europe/Paris}
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-hopital}
+      DB_USER: ${DB_USER:-hopital}
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET manquant dans .env}
+      COOKIE_SECURE: ${COOKIE_SECURE:-0}
+      SESSION_HEURES: ${SESSION_HEURES:-12}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+    ports:
+      - "3000:3000"
+
+volumes:
+  dbdata:

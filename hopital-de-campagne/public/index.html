@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Hôpital de campagne</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 27 17 7l14 20z"/><path d="M17 7v20M11 27l6-10 6 10"/><path d="M1 27h32"/></svg>
+      <div><b>Hôpital de campagne</b><span>Poste médical avancé</span></div>
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <a href="#tableau" data-v="tableau">Tableau de bord</a>
+      <a href="#admissions" data-v="admissions">Admissions<i id="nbq" hidden></i></a>
+      <a href="#dossiers" data-v="dossiers">Dossiers</a>
+      <a href="#blocs" data-v="blocs">Blocs</a>
+      <a href="#journal" data-v="journal" id="navj" hidden>Journal</a>
+    </nav>
+    <div class="railfoot">
+      <div class="userbox" id="userbox"></div>
+      <div class="sync" id="sync">Connexion…</div>
+      <div id="clock" class="mono"></div>
+    </div>
+  </aside>
+  <div class="stage">
+    <div class="banner"><span id="bannerx"></span></div>
+    <main id="main" aria-live="off"></main>
+  </div>
+</div>
+<div class="login" id="login" hidden>
+  <form id="loginform" novalidate>
+    <h1>Hôpital de campagne</h1>
+    <p>Connectez-vous pour accéder aux dossiers.</p>
+    <div class="fld"><label for="l_id">Identifiant</label><input id="l_id" name="identifiant" autocomplete="username" autocapitalize="off" spellcheck="false"></div>
+    <div class="fld"><label for="l_pw">Mot de passe</label><input id="l_pw" name="mot_de_passe" type="password" autocomplete="current-password"></div>
+    <p class="err" id="l_err" role="alert"></p>
+    <button class="btn pri" type="submit" id="l_btn">Se connecter</button>
+  </form>
+</div>
+<div id="drawer"></div>
+<div id="toast" role="status"></div>
+<script src="/app.js"></script>
+</body>
+</html>
